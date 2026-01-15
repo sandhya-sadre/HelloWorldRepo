@@ -9,31 +9,25 @@ jobs:
   build:
     runs-on: windows-latest
 
-    # Matrix build with two jobs (both .NET 8)
-    strategy:
-      matrix:
-        job-name: ['job1', 'job2']   # Just to create two parallel jobs
-        dotnet-version: ['8.0.x', '8.0.x']  # Both using .NET 8
-
     steps:
-    # Step 1: Checkout the repository
-    - name: Checkout source code
-      uses: actions/checkout@v4
+      # Step 1: Checkout the repository
+      - name: Checkout source code
+        uses: actions/checkout@v4
 
-    # Step 2: Setup the .NET SDK
-    - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: ${{ matrix.dotnet-version }}
+      # Step 2: Setup .NET SDK 8
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
 
-    # Step 3: Restore dependencies
-    - name: Restore dependencies
-      run: dotnet restore HelloProj/HelloProj.csproj
+      # Step 3: Restore dependencies
+      - name: Restore dependencies
+        run: dotnet restore HelloProj/HelloProj.csproj
 
-    # Step 4: Build the project
-    - name: Build
-      run: dotnet build HelloProj/HelloProj.csproj --configuration Release --no-restore
+      # Step 4: Build the project
+      - name: Build
+        run: dotnet build HelloProj/HelloProj.csproj --configuration Release --no-restore
 
-    # Step 5: Run the Hello World application
-    - name: Run Hello World
-      run: dotnet run --project HelloProj/HelloProj.csproj
+      # Step 5: Run the Hello World application
+      - name: Run Hello World
+        run: dotnet run --project HelloProj/HelloProj.csproj
