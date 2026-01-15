@@ -9,9 +9,11 @@ jobs:
   build:
     runs-on: windows-latest
 
+    # Matrix build with two jobs (both .NET 8)
     strategy:
       matrix:
-        dotnet-version: ['8.0.x', '8.0.x']
+        job-name: ['job1', 'job2']   # Just to create two parallel jobs
+        dotnet-version: ['8.0.x', '8.0.x']  # Both using .NET 8
 
     steps:
     # Step 1: Checkout the repository
