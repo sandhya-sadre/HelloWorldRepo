@@ -6,15 +6,12 @@ on:
   pull_request:
 
 jobs:
-  # Job 1
   build-job1:
     runs-on: windows-latest
     steps:
-      - name: Checkout source code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup .NET SDK 8
-        uses: actions/setup-dotnet@v4
+      - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
 
@@ -25,17 +22,14 @@ jobs:
         run: dotnet build HelloProj/HelloProj.csproj --configuration Release --no-restore
 
       - name: Run Hello World
-        run: dotnet run --project HelloProj/HelloProj.csproj
+        run: dotnet run --project HelloProj/HelloProj.csproj --framework net8.0
 
-  # Job 2
   build-job2:
     runs-on: windows-latest
     steps:
-      - name: Checkout source code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup .NET SDK 8
-        uses: actions/setup-dotnet@v4
+      - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
 
@@ -46,4 +40,4 @@ jobs:
         run: dotnet build HelloProj/HelloProj.csproj --configuration Release --no-restore
 
       - name: Run Hello World
-        run: dotnet run --project HelloProj/HelloProj.csproj
+        run: dotnet run --project HelloProj/HelloProj.csproj --framework net8.0
